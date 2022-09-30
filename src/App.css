@@ -5,13 +5,12 @@ body{
 
 /* App */ 
 .App{
-  background-color: #23252C;
+  background-color: #F8EDE3;
   justify-content: center;
   align-items: center;
   font-family: 'Inter', sans-serif;
   height: 100vh; 
-  width: auto;
-  padding: 30px;  
+  width: auto;  
 }
 
 /* Info-section */ 
@@ -165,7 +164,8 @@ body{
   justify-content: left; 
   font-weight: 700;
   letter-spacing: -0.05em;
-  color: #ffffff; 
+  color: #3F4E4F;
+  background-color: #DFD3C3; 
 }
 
 .navbar--logo{
@@ -175,6 +175,12 @@ body{
 }
 
 .navbar--container a{
-  padding: 0 0 10px 20px; 
+  margin: 0 0 30px 20px; 
   cursor:pointer; 
+}
+
+.navbar--items{
+  padding: 20px; 
+  display: flex; 
+
 }

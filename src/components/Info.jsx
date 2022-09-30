@@ -1,6 +1,7 @@
 import React from "react"
 import {useState, useEffect} from 'react'
 import { fetchApod } from '../apis/ApodAPI'
+import Picture from '../images/react-project-picture.jpeg'
 
 
 export default function Info(){
@@ -21,7 +22,7 @@ export default function Info(){
     return(
         <div className="info--container">
             <div className="info--text">
-                <img src={apodData.url} className="info--image" alt="Christofer Hearne"></img>
+                <img src={Picture} className="info--image" alt="Christofer Hearne"></img>
                 <h2 className="info--header">Christofer Hearne</h2>
                 <h4 className="info--jobtitle">Software Developer Consultant</h4>
                 <span className="info--website">christoferhearne.heroku.app</span>
