@@ -11,7 +11,7 @@ body{
   font-family: 'Inter', sans-serif;
   height: 100vh; 
   width: auto;
-  padding: 50px;  
+  padding: 30px;  
 }
 
 /* Info-section */ 
@@ -155,4 +155,26 @@ body{
 
 .footer--container a:hover{
   cursor: pointer;
+}
+
+/* Navbar Section */
+
+.navbar--container{
+  display: flex;
+  align-items: center; 
+  justify-content: left; 
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #ffffff; 
+}
+
+.navbar--logo{
+  width: 10%;
+  height: auto;
+  padding-right: 20px;  
+}
+
+.navbar--container a{
+  padding: 0 0 10px 20px; 
+  cursor:pointer; 
 }
