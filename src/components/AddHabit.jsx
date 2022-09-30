@@ -3,8 +3,12 @@ import {useState, useEffect} from 'react'
 
 export default function AddHabit(){
     const [habit, setHabit] = useState('')
+    const [habitList, setHabitList] = useState([])
     function addHabit(){
-
+        const habitElement = <div className="habit--item" key={habitList.length}>
+                                <span className="habit--title">{habit}</span>
+                            </div>
+        setHabitList(habitList.concat(habitElement))
     }
 
     const handleChange = event => {
@@ -23,9 +27,7 @@ export default function AddHabit(){
                 <button className="add--btn" onClick={addHabit}>Add</button> 
             </div>
             <div className="habits--container">
-                <div className="habit--item">
-                    <span className="habit--title">Smoke</span>
-                </div>
+                {habitList}
             </div>
         </div>
     )
