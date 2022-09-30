@@ -1,6 +1,8 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 
+
+// TODO: Use list.map() instead of a concat version in addHabit. map the list of elements in the return statement instead. Just push the habit-title to the list then display. 
 export default function AddHabit(){
     const [habit, setHabit] = useState('')
     const [habitList, setHabitList] = useState([])
