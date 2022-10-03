@@ -1,14 +1,33 @@
 import React from "react";
 import { useState } from 'react'
 
+
+// TODO: Gotta make sure item is deleted only when the drop is completed and data is transferred
+    // BUG: It marks the headers
 export default function CategoryComponent(){
     const [positiveList, setPositiveList] = useState([])
     const [neutralList, setNeutralList] = useState([])
     const [negativeList, setNegativeList] = useState([])
     
     const onDragging = e => {
-        console.log("Now im dragging it over a dropzone")
         e.preventDefault()
+    }
+
+    const setData = e => {
+        e.dataTransfer.setData("text/plain", e.target.innerText)
+    }
+
+    const deleteFromCategoryList = (e, index) => {
+        console.log(e.target.className)
+        if(e.target.className === 'category--item--positive'){
+            setPositiveList(positiveList.filter((element) => positiveList[index] !== element))
+        }
+        else if(e.target.className === 'category--item--neutral'){
+            setNeutralList(neutralList.filter((element) => neutralList[index] !== element))
+        }
+        else if(e.target.className === 'category--item--negative'){
+            setNegativeList(negativeList.filter((element) => negativeList[index] !== element))
+        }
     }
 
     const dropEvent = e => {
@@ -32,13 +51,17 @@ export default function CategoryComponent(){
                     <i className="fa-solid fa-plus"></i>
                 </div>
                 <div 
-                    className="category--list--positive" 
+                    className="category--list--positive"
                     onDragOver={onDragging}
                     onDrop={dropEvent}>
                     {
                         positiveList.map((positiveHabit, index) => {
                             return(
-                                <div className="category--item--positive" key={index}>
+                                <div className="category--item--positive" 
+                                    key={index}
+                                    draggable
+                                    onDragStart={setData}
+                                    onDragEnd={e => deleteFromCategoryList(e, index)}>
                                     <span className="category--item--name">{positiveHabit}</span>
                                     <i className="fa-solid fa-plus"></i>
                                 </div>
@@ -53,12 +76,16 @@ export default function CategoryComponent(){
                     <i className="fa-solid fa-equals"></i>
                 </div>
                 <div 
-                    className="category--list--neutral" 
+                    className="category--list--neutral"
                     onDragOver={onDragging}
                     onDrop={dropEvent}>
                     {neutralList.map((neutralHabit, index) => {
                         return(
-                            <div className="category--item--neutral" key={index}>
+                            <div className="category--item--neutral" 
+                                key={index}
+                                draggable
+                                onDragStart={setData}
+                                onDragEnd={e => deleteFromCategoryList(e, index)}>
                                 <span className="category--item--name">{neutralHabit}</span>
                                 <i className="fa-solid fa-equals"></i>
                             </div>
@@ -72,12 +99,16 @@ export default function CategoryComponent(){
                     <i className="fa-solid fa-minus"></i>
                 </div>
                 <div 
-                    className="category--list--negative" 
-                    onDragOver={onDragging}
-                    onDrop={dropEvent}>
+                    className="category--list--negative"
+                    onDrop={dropEvent}
+                    onDragOver={onDragging}>
                     {negativeList.map((negativeHabit, index) => {
                         return(
-                            <div className="category--item--negative" key={index}>
+                            <div className="category--item--negative"
+                                 key={index}
+                                 draggable
+                                 onDragStart={setData}
+                                 onDragEnd={e => deleteFromCategoryList(e, index)}>
                                 <span className="category--item--name">{negativeHabit}</span>
                                 <i className="fa-solid fa-minus"></i>
                             </div>
