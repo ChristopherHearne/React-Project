@@ -19,8 +19,7 @@ export default function AddHabit(){
     }
 
     const dragStart = (event) => {
-        const data = event.dataTransfer.setData("text/plain", event.target.innerText)
-        console.log(data)
+       event.dataTransfer.setData("text/plain", event.target.innerText)
     }
     return(
         <div className="add--habit--container">
@@ -32,7 +31,7 @@ export default function AddHabit(){
                     value={habit}
                     onChange={handleChange}
                 />
-                <button className="add--btn" onClick={addHabit}><i class="fa-solid fa-plus"></i></button> 
+                <button className="add--btn" onClick={addHabit}><i className="fa-solid fa-plus"></i></button> 
             </div>
             <div className="habits--container">
                 {habitList.map((habit ,index) => {
@@ -41,14 +40,15 @@ export default function AddHabit(){
                             className="habit--item" 
                             key={index}
                             draggable
-                            onDragStart={dragStart}>
+                            onDragStart={dragStart}
+                            onDragEnd={deleteHabit(index)}>
                             <span
                                 className="habit--title">
                                     {habit}
                             </span>
                             <span className="delete--item"
                                 key={index}
-                                onClick={event => deleteHabit(index)}>
+                                onClick={deleteHabit(index)}>
                                 <i 
                                 className="fa-solid fa-x"
                                 key={index}>

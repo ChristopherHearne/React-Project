@@ -50,7 +50,7 @@ export default function CategoryComponent(){
             <div className="neutral--container">
                 <div className="category--header">
                     <h3>Neutral</h3>
-                    <i class="fa-solid fa-equals"></i>
+                    <i className="fa-solid fa-equals"></i>
                 </div>
                 <div 
                     className="category--list--neutral" 
@@ -69,7 +69,7 @@ export default function CategoryComponent(){
             <div className="negative--container">
                 <div className="category--header">
                     <h3>Negative</h3>
-                    <i class="fa-solid fa-minus"></i>
+                    <i className="fa-solid fa-minus"></i>
                 </div>
                 <div 
                     className="category--list--negative" 
