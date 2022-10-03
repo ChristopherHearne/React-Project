@@ -18,7 +18,7 @@ export default function AddHabit(){
         setHabit(event.target.value)
     }
 
-    const dragStart = (event) => {
+    const dragStart = (event, index) => {
        event.dataTransfer.setData("text/plain", event.target.innerText)
     }
     return(
@@ -41,14 +41,14 @@ export default function AddHabit(){
                             key={index}
                             draggable
                             onDragStart={dragStart}
-                            onDragEnd={deleteHabit(index)}>
+                            onDragEnd={event => deleteHabit(index)}>
                             <span
                                 className="habit--title">
                                     {habit}
                             </span>
                             <span className="delete--item"
                                 key={index}
-                                onClick={deleteHabit(index)}>
+                                onClick={event => deleteHabit(index)}>
                                 <i 
                                 className="fa-solid fa-x"
                                 key={index}>

@@ -14,13 +14,13 @@ export default function CategoryComponent(){
     const dropEvent = e => {
         e.preventDefault()
         const data = e.dataTransfer.getData("text/plain")
-        if (e.target.className == 'category--list--positive'){
+        if (e.target.className === 'category--list--positive'){
             setPositiveList(arr => [...arr, data])
         }
-        else if(e.target.className == 'category--list--neutral'){
+        else if(e.target.className === 'category--list--neutral'){
             setNeutralList(arr => [...arr, data])
         }
-        else if(e.target.className == 'category--list--negative'){
+        else if(e.target.className === 'category--list--negative'){
             setNegativeList(arr => [...arr, data])
         }
     }
