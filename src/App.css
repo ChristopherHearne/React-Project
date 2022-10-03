@@ -31,7 +31,7 @@ body{
   margin: 0 auto;  
 }
 .info--text{
-  text-align: center; 
+  text-align: center;   
   display: block; 
   justify-content: center;
   align-items: center;
@@ -327,7 +327,7 @@ body{
   border-radius: 25px 25px 25px 25px; 
 }
 
-.category--list{
+.category--list--positive, .category--list--neutral, .category--list--negative{
   background-color: #DFD3C3;
   height: 450px; 
   width: 100%;
@@ -360,7 +360,8 @@ body{
   align-items: center;
   padding: 0 25px 0 25px;
   font-weight: 400;
-  letter-spacing: -0.06em;   
+  letter-spacing: -0.06em;
+  margin-bottom: 10px;  
 }
 
 .category--item--negative{

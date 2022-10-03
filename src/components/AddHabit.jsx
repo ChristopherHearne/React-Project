@@ -10,12 +10,17 @@ export default function AddHabit(){
         setHabitList(arr => [...arr, habit])
     }
 
-    const deleteHabit = (event, index) => {
+    const deleteHabit = (index) => {
         setHabitList(habitList.filter((element) => habitList[index] !== element))
     }
 
     const handleChange = (event) => {
         setHabit(event.target.value)
+    }
+
+    const dragStart = (event) => {
+        const data = event.dataTransfer.setData("text/plain", event.target.innerText)
+        console.log(data)
     }
     return(
         <div className="add--habit--container">
@@ -34,14 +39,16 @@ export default function AddHabit(){
                     return(
                         <div
                             className="habit--item" 
-                            key={index}>
+                            key={index}
+                            draggable
+                            onDragStart={dragStart}>
                             <span
                                 className="habit--title">
                                     {habit}
                             </span>
                             <span className="delete--item"
                                 key={index}
-                                onClick={event => deleteHabit(event, index)}>
+                                onClick={event => deleteHabit(index)}>
                                 <i 
                                 className="fa-solid fa-x"
                                 key={index}>
