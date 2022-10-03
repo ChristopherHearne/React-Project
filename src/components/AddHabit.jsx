@@ -27,7 +27,7 @@ export default function AddHabit(){
                     value={habit}
                     onChange={handleChange}
                 />
-                <button className="add--btn" onClick={addHabit}>Add</button> 
+                <button className="add--btn" onClick={addHabit}><i class="fa-solid fa-plus"></i></button> 
             </div>
             <div className="habits--container">
                 {habitList.map((habit ,index) => {

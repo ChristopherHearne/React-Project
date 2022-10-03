@@ -221,6 +221,24 @@ body{
   transition: all 0.1s ease 0s;
 }
 
+.input--container button{
+  margin-left: -50px;
+  border-radius: 50%; 
+  height: 30px;
+  border: 0;
+  background: rgb(251, 251, 251);
+  cursor: pointer;
+  transition: all 0.1s ease 0.1s;  
+}
+
+.input--container button:hover{
+  background-color: #EBE6D9;
+}
+
+.input--container .fa-plus{
+  font-size: 20px; 
+}
+
 .input--container input:focus{
   border: 2px solid rgb(124, 138, 255);
 }
