@@ -207,6 +207,24 @@ body{
   align-items: center;
 }
 
+.input--container input{
+  width: 40%;
+  color: rgb(36, 35, 42);
+  font-size: 16px;
+  line-height: 20px;
+  min-height: 28px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  background: rgb(251, 251, 251);
+  transition: all 0.1s ease 0s;
+}
+
+.input--container input:focus{
+  border: 2px solid rgb(124, 138, 255);
+}
+
 .habits--container{
   display: grid;
   justify-items: center; 
@@ -277,7 +295,66 @@ body{
   justify-content: center; 
   align-items: center;
   margin: 0 auto; 
+  height: auto;
+  padding: 5px; 
+}
+
+.positive--container, .neutral--container, .negative--container{
+  width: 35%; 
   height: auto; 
+  display: block; 
+  padding: 0;
+  margin: 25px; 
+  background-color: #ccbfaf;
+  border-radius: 25px 25px 25px 25px; 
+}
+
+.category--list{
+  background-color: #DFD3C3;
+  height: 450px; 
+  width: 100%;
+  border-radius: 0 0 25px 25px; 
+  padding: 10px 0 10px 0; 
+}
+
+.category--header{
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  text-align: center;
+  color: #3F4E4F;
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: -0.04em; 
+}
+
+.category--header h3{
+  margin-right: 20px; 
+}
+
+.category--item--negative, .category--item--positive, .category--item--neutral{
+  font-size: 20px; 
+  width: auto;
+  height: 10%; 
+  border-radius: 10px;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0 25px 0 25px;
+  font-weight: 400;
+  letter-spacing: -0.06em;   
+}
+
+.category--item--negative{
+  background-color: #ff6961;
+}
+
+.category--item--positive{
+  background-color: #93C572; 
+}
+
+.category--item--neutral{
+  background-color: #EBE6D9; 
 }
 
 
