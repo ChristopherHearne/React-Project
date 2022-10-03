@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar'
 import AddHabit from './components/AddHabit'
+import CategoryComponent from './components/CategoryComponent';
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
       <Navbar />
       <AddHabit />
+      <CategoryComponent />
     </div>
   );
 }
