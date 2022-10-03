@@ -223,6 +223,7 @@ body{
 
 .habit--item{
   overflow:auto;
+  cursor: grab;
   word-wrap: break-word;
   display: flex;
   position: relative; 
