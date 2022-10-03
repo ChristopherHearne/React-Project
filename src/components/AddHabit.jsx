@@ -6,14 +6,29 @@ import {useState, useEffect} from 'react'
 export default function AddHabit(){
     const [habit, setHabit] = useState('')
     const [habitList, setHabitList] = useState([])
-    function addHabit(){
-        const habitElement = <div className="habit--item" key={habitList.length}>
-                                <span className="habit--title">{habit}</span>
+
+    const addHabit = () => {
+        const habitElement = <div
+                                className="habit--item" 
+                                key={habitList.length}>
+                                <span
+                                    className="habit--title">
+                                        {habit}
+                                </span>
+                                <span className="delete--item"
+                                    onClick={deleteHabit}>
+                                    <i class="fa-solid fa-x"></i>
+                                </span>
                             </div>
         setHabitList(habitList.concat(habitElement))
     }
 
-    const handleChange = event => {
+    const deleteHabit = (element, key) => {
+        console.log(element.target)
+        console.log(key)
+    }
+
+    const handleChange = (event) => {
         setHabit(event.target.value)
     }
     return(

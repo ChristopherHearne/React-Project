@@ -222,9 +222,10 @@ body{
 }
 
 .habit--item{
-  overflow: hidden;
+  overflow:auto;
   word-wrap: break-word;
   display: flex;
+  position: relative; 
   justify-content: center;
   align-items: center; 
   color: #3F4E4F;
@@ -236,3 +237,35 @@ body{
   text-align: center; 
   border-radius: 40px;
 }
+
+.habit--item:hover .delete--item{
+  display: flex;
+  transition: 1.5s;  
+}
+
+.delete--item{
+  display: none; 
+  justify-content: center;
+  height: 25px; 
+  width: 25px;
+  background-color: #ccbfaf;
+  border: 0.8px solid #3F4E4F; 
+  border-radius: 50%;
+  position: absolute; 
+  top: 5px;
+  right: 15px; 
+  color: #000; 
+  animation-timing-function: ease-in;
+}
+
+.delete--item:hover{
+  cursor: pointer;
+}
+
+.fa-x:before{
+  font-size: 12px; 
+  color: #000;
+  text-align: center;  
+}
+
+
