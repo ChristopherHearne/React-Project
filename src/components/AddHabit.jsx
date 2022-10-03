@@ -2,30 +2,16 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 
 
-// TODO: Use list.map() instead of a concat version in addHabit. map the list of elements in the return statement instead. Just push the habit-title to the list then display. 
 export default function AddHabit(){
     const [habit, setHabit] = useState('')
     const [habitList, setHabitList] = useState([])
-
+    
     const addHabit = () => {
-        const habitElement = <div
-                                className="habit--item" 
-                                key={habitList.length}>
-                                <span
-                                    className="habit--title">
-                                        {habit}
-                                </span>
-                                <span className="delete--item"
-                                    onClick={deleteHabit}>
-                                    <i class="fa-solid fa-x"></i>
-                                </span>
-                            </div>
-        setHabitList(habitList.concat(habitElement))
+        setHabitList(arr => [...arr, habit])
     }
 
-    const deleteHabit = (element, key) => {
-        console.log(element.target)
-        console.log(key)
+    const deleteHabit = (event, index) => {
+        setHabitList(habitList.filter((element) => habitList[index] !== element))
     }
 
     const handleChange = (event) => {
@@ -44,7 +30,27 @@ export default function AddHabit(){
                 <button className="add--btn" onClick={addHabit}>Add</button> 
             </div>
             <div className="habits--container">
-                {habitList}
+                {habitList.map((habit ,index) => {
+                    return(
+                        <div
+                            className="habit--item" 
+                            key={index}>
+                            <span
+                                className="habit--title">
+                                    {habit}
+                            </span>
+                            <span className="delete--item"
+                                key={index}
+                                onClick={event => deleteHabit(event, index)}>
+                                <i 
+                                className="fa-solid fa-x"
+                                key={index}>
+                                </i>
+                            </span>
+                        </div>
+                    )
+
+                })}
             </div>
         </div>
     )
