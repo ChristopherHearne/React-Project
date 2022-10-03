@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 
 // TODO: Gotta make sure item is deleted only when the drop is completed and data is transferred
-    // BUG: It marks the headers
+    // BUG: It marks the headers, should probably use onDrop instead of onDragOver
 export default function CategoryComponent(){
     const [positiveList, setPositiveList] = useState([])
     const [neutralList, setNeutralList] = useState([])
