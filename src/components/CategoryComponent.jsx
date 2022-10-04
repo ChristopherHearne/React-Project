@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 // TODO: Gotta make sure item is deleted only when the drop is completed and data is transferred
     // BUG: It marks the headers, should probably use onDrop instead of onDragOver
+    // BUG: Any drag and drop zone outside of the categories deletes the item, could be fixed with backend integration?
 export default function CategoryComponent(){
     const [positiveList, setPositiveList] = useState([])
     const [neutralList, setNeutralList] = useState([])
