@@ -1,28 +1,29 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 export default function SignIn(){
+    const googleSignInButton = useRef(null)
     
-    useEffect(() => {
-        window.gapi.signin2.render('g-signin2', {
-            'scope': 'https://www.googleapis.com/auth/plus.login',
-            'width': 200,
-            'height': 50,
-            'longtitle': true, 
-            'theme': 'dark',
-            'onsuccess': {onSignIn}
-        })
-    })
-    function onSignIn(googleUser){
-        console.log("Triggered")
-        const profile = googleUser.getBasicProfile()
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    const onResponse = async ({credential}) => {
+        console.log(credential)
     }
-    return(
-        <>
-            <div id="g-signin2"></div>
-        </>
+    window.google.accounts.id.initialize({
+        client_id: "896013867387-ltnfg30uau25jqguvdd35v1ubp35u58l.apps.googleusercontent.com",
+        callback: onResponse,
+        auto_select: false
+    })
+    
+    window.google.accounts.id.renderButton(
+        googleSignInButton.current, 
+        { theme: "outline", size: "large", text:'signin_with', width: "250" }
+    )
+        
+    const onClick = () => {
+        window.google.accounts.id.prompt()
+    }
+
+    return (
+        <div className="testing">
+            <div className="test" ref={googleSignInButton} onClick={onClick}></div>
+        </div>
     )
 }
