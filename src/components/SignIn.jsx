@@ -7,7 +7,7 @@ export default function SignIn(){
     useEffect(() => {
         if (googleSignInButton.current) {
           window.google.accounts.id.initialize({
-            client_id: '896013867387-ltnfg30uau25jqguvdd35v1ubp35u58l.apps.googleusercontent.com',
+            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
             callback: async (res, error) => {
               try{
                     const token = res.credential
