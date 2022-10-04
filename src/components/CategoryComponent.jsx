@@ -8,6 +8,7 @@ export default function CategoryComponent(){
     const [positiveList, setPositiveList] = useState([])
     const [neutralList, setNeutralList] = useState([])
     const [negativeList, setNegativeList] = useState([])
+    const [draggedElement, setDraggedElement] = useState('')
     
     const onDragging = e => {
         e.preventDefault()
@@ -15,10 +16,11 @@ export default function CategoryComponent(){
 
     const setData = e => {
         e.dataTransfer.setData("text/plain", e.target.innerText)
+        setDraggedElement(e.target.className)
     }
 
     const deleteFromCategoryList = (e, index) => {
-        console.log(e.target.className)
+        e.preventDefault()
         if(e.target.className === 'category--item--positive'){
             setPositiveList(positiveList.filter((element) => positiveList[index] !== element))
         }
@@ -31,15 +33,16 @@ export default function CategoryComponent(){
     }
 
     const dropEvent = e => {
+        console.log(e)
         e.preventDefault()
         const data = e.dataTransfer.getData("text/plain")
-        if (e.target.className === 'category--list--positive'){
+        if (e.target.className === 'category--list--positive' && draggedElement !== 'category--item--positive'){
             setPositiveList(arr => [...arr, data])
         }
-        else if(e.target.className === 'category--list--neutral'){
+        else if(e.target.className === 'category--list--neutral' && draggedElement !== 'category--item--neutral'){
             setNeutralList(arr => [...arr, data])
         }
-        else if(e.target.className === 'category--list--negative'){
+        else if(e.target.className === 'category--list--negative' && draggedElement !== 'category--item--negative'){
             setNegativeList(arr => [...arr, data])
         }
     }

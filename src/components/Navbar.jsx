@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../images/logo-squeed-v3.png'
-export default function Navbar(){
+export default function Navbar() {
     return (
         <nav className="navbar--container">
             <div className="navbar--items">
@@ -11,7 +11,7 @@ export default function Navbar(){
                     <a>Habit stacking</a>
                     <a>Stats</a>
                 </div>
-            </div> 
-        </nav> 
+            </div>
+        </nav>
     )
 }
