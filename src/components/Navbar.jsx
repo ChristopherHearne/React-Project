@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../images/logo-squeed-v3.png'
+import SignIn from './SignIn'
 export default function Navbar() {
     return (
         <nav className="navbar--container">
@@ -9,9 +10,10 @@ export default function Navbar() {
                     <a>Home</a>
                     <a>Scorecard</a>
                     <a>Habit stacking</a>
-                    <a>Stats</a>
+                    <a>My Manifesto</a>
                 </div>
             </div>
+            <SignIn />
         </nav>
     )
 }
