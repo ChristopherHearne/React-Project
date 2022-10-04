@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState, useEffect, useRef} from 'react'
-const jose = require('jose')
+import jwt from 'jwt-decode'
 export default function SignIn(){
     const googleSignInButton = useRef(null)
     
@@ -9,11 +9,10 @@ export default function SignIn(){
           window.google.accounts.id.initialize({
             client_id: '896013867387-ltnfg30uau25jqguvdd35v1ubp35u58l.apps.googleusercontent.com',
             callback: async (res, error) => {
-                console.log(typeof res.credential)
               try{
-                  const {payload, protectedHeader} =  await jose.jwtDecrypt(res.credential)
-                  console.log(payload)
-                  console.log(protectedHeader)
+                    const token = res.credential
+                    const user = jwt(token)
+                    console.log(user)
                 } catch(err){
                     console.log(err)
                 }
