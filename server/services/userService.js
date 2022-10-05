@@ -17,8 +17,11 @@ exports.getUser = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
+    console.log(req)
     const {id, name, givenName, familyName, email, pictureURL, domain} = req.body
-
-    const user = new User({id, name, givenName, familyName, email, pictureURL, domain})
-    User.save) 
+    const userInfo = new User({id, name, givenName, familyName, email, pictureURL, domain})
+    userInfo.save((err) => {
+        if (err) res.status(401).send(err)
+        res.status(201).json(userInfo)
+    })
 }

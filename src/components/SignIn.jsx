@@ -14,12 +14,22 @@ export default function SignIn(){
             callback: async (res) => {
               try{
                     const token = res.credential
-                    const userData = jwt(token)
-
+                    let userData = jwt(token)
+                    console.log(userData)
                     setUser(userData)
+
                     setHideSignIn(true)
                     setShowUserInfo(true)
-                    console.log(user)
+
+                    await fetch('http://localhost:3002/users', {
+                      method: 'POST',
+                      headers: {
+                        Accept: 'application/json',
+                        'Content-type': "application/json"
+                      },
+                      mode: 'no-cors',
+                      body: JSON.stringify(userData)
+                    })
                 } catch(err){
                     alert(err)
                 }
@@ -39,7 +49,7 @@ export default function SignIn(){
     const onClick = () => {
         window.google.accounts.id.prompt()
     }
-    console.log(user)
+
     return (
         <div className="sign--in--container">
             <div className={`btn--visible ${hideSignIn ? "btn--hide" :""}`} ref={googleSignInButton} onClick={onClick}></div>
