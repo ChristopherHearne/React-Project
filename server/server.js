@@ -1,8 +1,8 @@
-import express from 'express'
-import mongoose from 'mongoose'
+const express = require('express')
+const mongoose = require('mongoose')
 
-const app = express()
-mongoose.connect(process.env.REACT_APP_MONGODB_CONNECTION_STRING)
+const app = express(); 
+mongoose.connect('mongodb+srv://habeed:h6DT6JUfH9wrCAP@cluster0.kjlgy40.mongodb.net/test')
 
 let db = mongoose.connection
 
@@ -22,10 +22,15 @@ app.use( (req, res, next) =>  {
     next();
 })
 
-const port = process.env.REACT_APP_PORT || 3000
+const port = process.env.REACT_APP_PORT || 3001
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
+})
+
+app.get('/api', (req, res) => {
+    res.json({message: "Hello World"})
+    console.log(res.json({message: "Hello world"}))
 })
 
 app.set('json spaces', 2)
