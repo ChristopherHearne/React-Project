@@ -19,6 +19,7 @@ export default function SignIn(){
                     setUser(userData)
                     setHideSignIn(true)
                     setShowUserInfo(true)
+                    console.log(user)
                 } catch(err){
                     alert(err)
                 }
@@ -44,7 +45,7 @@ export default function SignIn(){
             <div className={`btn--visible ${hideSignIn ? "btn--hide" :""}`} ref={googleSignInButton} onClick={onClick}></div>
             <div className={`user--info--hidden ${showUserInfo ? "user--info--visible" :""}`}>
                 <p>Welcome {user.given_name} {user.family_name}!</p>
-                <img src={user.picture}></img>
+                <img src={user.picture} alt={`${user.given_name}'s Google Account`}></img>
             </div>
         </div>
     )

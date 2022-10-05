@@ -2,7 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const app = express(); 
-mongoose.connect('mongodb+srv://habeed:h6DT6JUfH9wrCAP@cluster0.kjlgy40.mongodb.net/test')
+mongoose.connect(
+    'mongodb+srv://habeed:h6DT6JUfH9wrCAP@cluster0.kjlgy40.mongodb.net/test'
+)
 
 let db = mongoose.connection
 
@@ -30,7 +32,6 @@ app.listen(port, () => {
 
 app.get('/api', (req, res) => {
     res.json({message: "Hello World"})
-    console.log(res.json({message: "Hello world"}))
 })
 
 app.set('json spaces', 2)

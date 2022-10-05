@@ -8,6 +8,7 @@ export default function AddHabit(){
     
     const addHabit = () => {
         setHabitList(arr => [...arr, habit])
+        setHabit('')
     }
 
     const deleteHabit = (index) => {
