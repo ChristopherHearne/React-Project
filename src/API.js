@@ -31,8 +31,7 @@ export async function fetchUserByEmail(email){
             method: 'GET',
             headers: {
                 'Content-type': "application/json",
-                credentials: "same-origin",
-                cors: 'no-cors'
+                'X-Requested-With': 
             },
         })
         return request.status
