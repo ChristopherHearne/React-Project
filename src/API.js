@@ -26,12 +26,11 @@ export async function postUserData(userData) {
 
 export async function fetchUserByEmail(email){
     try{
-        const request = await fetch(`http://localhost:3002/users/email`, {
+        const request = await fetch(`http://localhost:3002/users/emails/${email}`, {
             method: 'GET',
             headers: {
                 'Content-type': "application/json"
             },
-            body: JSON.stringify(email)
         })
         const result = await request.json()
         return result
