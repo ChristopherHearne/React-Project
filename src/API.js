@@ -25,11 +25,29 @@ export async function postUserData(userData) {
 }
 
 export async function fetchUserByEmail(email){
+    const requestURL = `http://localhost:3002/users/emails/${email}`
     try{
-        const request = await fetch(`http://localhost:3002/users/emails/${email}`, {
+        const request = await fetch(requestURL, {
             method: 'GET',
             headers: {
-                'Content-type': "application/json"
+                'Content-type': "application/json",
+                credentials: "same-origin",
+                cors: 'no-cors'
+            },
+        })
+        return request.status
+    } catch(error){
+        console.log(error.message)
+    }
+}
+
+export async function fetchUsers(){
+    const requestURL = `http://localhost:3002/users`
+    try{
+        const request = await fetch(requestURL, {
+            method: 'GET',
+            headers: {
+                'Content-type': "application/json",
             },
         })
         const result = await request.json()

@@ -10,9 +10,11 @@ export default function SignIn(){
     const [hasPreviousLogin, setHasPreviousLogin] = useState(false)
     
     const checkPreviousLogin = async (email) => {
-      const request =  await fetchUserByEmail(email)
-      const result = request.json()
-      console.log(result.status)
+      const requestStatus =  await fetchUserByEmail(email)
+      console.log(requestStatus)
+      if (requestStatus !== 404){
+        setHasPreviousLogin(true)
+      } 
     }
     useEffect(() => {
         if (googleSignInButton.current) {
@@ -22,8 +24,12 @@ export default function SignIn(){
               try{
                     const token = res.credential
                     let userData = jwt(token)
-                    checkPreviousLogin(userData.email)
-                    await postUserData(userData)
+                    await checkPreviousLogin(userData.email)
+
+                    if (!hasPreviousLogin){
+                      await postUserData(userData)
+                    }
+
                     setActiveUser(userData)
                     setHideSignIn(true)
                     setShowUserInfo(true)
