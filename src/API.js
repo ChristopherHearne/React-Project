@@ -48,6 +48,7 @@ export async function fetchUsers(){
             method: 'GET',
             headers: {
                 'Content-type': "application/json",
+                'X-Requested-With': 'XMLHttpRequest'
             },
         })
         const result = await request.json()
