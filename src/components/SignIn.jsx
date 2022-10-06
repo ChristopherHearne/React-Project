@@ -24,7 +24,7 @@ export default function SignIn(){
                       pictureURL: userData.picture,
                       domain: userData.hd 
                     }
-                    console.log(userData.picture)
+                    console.log(JSON.stringify(dbData))
                     setUser(dbData)
                     setHideSignIn(true)
                     setShowUserInfo(true)
@@ -32,9 +32,8 @@ export default function SignIn(){
                     await fetch('http://localhost:3002/users', {
                       method: 'POST',
                       headers: {
-                        'Content-type': "application/x-www-form-urlencoded"
+                        'Content-type': "application/json"
                       },
-                      mode: 'no-cors',
                       body: JSON.stringify(dbData)
                     })
                 } catch(err){

@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({'extended': true}))
 mongoose.connect(
-    'mongodb+srv://habeed:h6DT6JUfH9wrCAP@cluster0.kjlgy40.mongodb.net/test'
+    'mongodb+srv://habeed:h6DT6JUfH9wrCAP@cluster0.kjlgy40.mongodb.net/habeed'
 )
 
 let db = mongoose.connection

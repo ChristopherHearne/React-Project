@@ -17,9 +17,7 @@ exports.getUser = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
-    const data = JSON.parse(Object.keys(req.body))
-    console.log(data)
-    const {id, name, givenName, familyName, email, pictureURL, domain} = data
+    const {id, name, givenName, familyName, email, pictureURL, domain} = req.body
     const userInfo = new User({id, name, givenName, familyName, email, pictureURL, domain})
     userInfo.save((err) => {
         if (err) res.status(401).send(err)
