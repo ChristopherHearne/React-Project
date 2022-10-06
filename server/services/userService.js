@@ -35,11 +35,11 @@ exports.createUser = (req, res) => {
 }
 
 exports.findUserByEmail = (req, res) => {
-    User.find({email: req.body.email}, (user, err) => {
+    User.findOne({email: req.params.email}, (user, err) => {
         if(err) {
             res.status(401).send(err)
         }
-        if(user === null) {
+        else if(user === null) {
             res.status(404).json({Error: "Could not find a user with that email"})
         }
         else{

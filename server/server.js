@@ -43,7 +43,7 @@ app.get('/users/:id', (req, res) => {
     userService.getUser(req, res)
 })
 
-app.get('/email', (req, res) => {
+app.get('/users/emails/:email', (req, res) => {
     userService.findUserByEmail(req, res)
 })
 
