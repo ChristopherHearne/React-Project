@@ -39,5 +39,13 @@ app.get('/users', (req, res) => {
     userService.getAllUsers(req, res)
 })
 
+app.get('/users/:id', (req, res) => {
+    userService.getUser(req, res)
+})
+
+app.get('/email', (req, res) => {
+    userService.findUserByEmail(req, res)
+})
+
 
 app.set('json spaces', 2)

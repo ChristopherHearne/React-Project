@@ -1,12 +1,19 @@
 import React from 'react'
 import {useState, useEffect, useRef} from 'react'
 import jwt from 'jwt-decode'
+import { postUserData, fetchUserByEmail } from '../API'
 export default function SignIn(){
     const googleSignInButton = useRef(null)
     const [hideSignIn, setHideSignIn] = useState(false)
     const [showUserInfo, setShowUserInfo] = useState(false)
-    const [user, setUser] = useState({})
+    const [activeUser, setActiveUser] = useState({})
+    const [hasPreviousLogin, setHasPreviousLogin] = useState(false)
     
+    const checkPreviousLogin = async (email) => {
+      const request =  await fetchUserByEmail(email)
+      const result = request.json()
+      console.log(result.status)
+    }
     useEffect(() => {
         if (googleSignInButton.current) {
           window.google.accounts.id.initialize({
@@ -15,27 +22,11 @@ export default function SignIn(){
               try{
                     const token = res.credential
                     let userData = jwt(token)
-                    let dbData = 
-                    {
-                      name: userData.name,
-                      givenName: userData.given_name,
-                      familyName: userData.family_name,
-                      email: userData.email,
-                      pictureURL: userData.picture,
-                      domain: userData.hd 
-                    }
-                    console.log(JSON.stringify(dbData))
-                    setUser(dbData)
+                    checkPreviousLogin(userData.email)
+                    await postUserData(userData)
+                    setActiveUser(userData)
                     setHideSignIn(true)
                     setShowUserInfo(true)
-
-                    await fetch('http://localhost:3002/users', {
-                      method: 'POST',
-                      headers: {
-                        'Content-type': "application/json"
-                      },
-                      body: JSON.stringify(dbData)
-                    })
                 } catch(err){
                     alert(err)
                 }
@@ -60,8 +51,8 @@ export default function SignIn(){
         <div className="sign--in--container">
             <div className={`btn--visible ${hideSignIn ? "btn--hide" :""}`} ref={googleSignInButton} onClick={onClick}></div>
             <div className={`user--info--hidden ${showUserInfo ? "user--info--visible" :""}`}>
-                <p>Welcome {user.givenName} {user.familyName}!</p>
-                <img src={user.pictureURL} alt={`${user.givenName}'s Google Account`}></img>
+                <p>Welcome {activeUser.given_name} {activeUser.family_name}!</p>
+                <img src={activeUser.picture} alt={`${activeUser.given_name}'s Google Account`}></img>
             </div>
         </div>
     )
