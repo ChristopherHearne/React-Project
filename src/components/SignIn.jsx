@@ -7,14 +7,14 @@ export default function SignIn(){
     const [hideSignIn, setHideSignIn] = useState(false)
     const [showUserInfo, setShowUserInfo] = useState(false)
     const [activeUser, setActiveUser] = useState({})
-    const [hasPreviousLogin, setHasPreviousLogin] = useState(false)
     
-    const checkPreviousLogin = async (email) => {
-      const requestStatus =  await fetchUserByEmail(email)
-      console.log(requestStatus)
-      if (requestStatus !== 404){
-        setHasPreviousLogin(true)
-      } 
+    const checkPreviousLogin = async (email) => { // TODO: Sends a 401 Unauthorized status every time the fetch is made, needs to be fixed. This means a correct fetch doesnt return the 201 status
+      const response =  await fetchUserByEmail(email)
+      if (response.status !== 404){
+        console.log("Had previous login")
+        return true
+      }
+      return false
     }
     useEffect(() => {
         if (googleSignInButton.current) {
@@ -24,9 +24,8 @@ export default function SignIn(){
               try{
                     const token = res.credential
                     let userData = jwt(token)
-                    await checkPreviousLogin(userData.email)
 
-                    if (!hasPreviousLogin){
+                    if (!await checkPreviousLogin(userData.email)){
                       await postUserData(userData)
                     }
 

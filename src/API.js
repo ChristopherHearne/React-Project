@@ -31,10 +31,12 @@ export async function fetchUserByEmail(email){
             method: 'GET',
             headers: {
                 'Content-type': "application/json",
-                'X-Requested-With': 
-            },
+            }
         })
-        return request.status
+        return {
+            status: request.status,
+            content: await request.json()
+        }
     } catch(error){
         console.log(error.message)
     }
