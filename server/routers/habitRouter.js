@@ -14,4 +14,8 @@ router.post('/', (req, res) => {
     habitService.postHabit(req, res)
 })
 
+router.delete('/:id', (req, res) => {
+    habitService.deleteHabit(req, res)
+})
+
 module.exports = router

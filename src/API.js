@@ -82,3 +82,20 @@ export async function postHabit(email, habitTitle){
         console.log(error)
     }
 }
+
+export async function destroyHabit(id){
+    const deleteRequestURL = `http://localhost:3002/habits/${id}`
+    try{
+        const deletedRequest = await fetch(deleteRequestURL, {
+            method: "DELETE",
+            headers: {
+                'Content-type': 'application/json'
+            },
+        })
+
+        const result = await deletedRequest.json()
+        return result
+    } catch(error){
+        console.log(error)
+    }
+}

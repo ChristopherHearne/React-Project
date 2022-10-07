@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import { postHabit } from '../API'
+import { postHabit, destroyHabit } from '../API'
 
 
 export default function AddHabit(){
@@ -11,11 +11,15 @@ export default function AddHabit(){
         const activeUser = JSON.parse(localStorage.getItem('user')).email
         const habitInfo = await postHabit(activeUser, habit)
         console.log(habitInfo)
-        setHabitList(arr => [...arr, habitInfo.title])
+        setHabitList(arr => [...arr, habitInfo])
+        console.log(habitList)
         setHabit('')
     }
 
-    const deleteHabit = (index) => {
+    // TODO: This is going to create a bug where the habits with the same title is going to be deleted in the DOM but not in the DB
+    const deleteHabit = async (index, id) => {
+        const requestInfo = await destroyHabit(id)
+        console.log(requestInfo)
         setHabitList(habitList.filter((element) => habitList[index] !== element))
     }
 
@@ -46,14 +50,14 @@ export default function AddHabit(){
                             key={index}
                             draggable
                             onDragStart={dragStart}
-                            onDragEnd={event => deleteHabit(index)}>
+                            onDragEnd={event => deleteHabit(index, habit.id)}>
                             <span
                                 className="habit--title">
-                                    {habit}
+                                    {habit.title}
                             </span>
                             <span className="delete--item"
                                 key={index}
-                                onClick={event => deleteHabit(index)}>
+                                onClick={event => deleteHabit(index, habit.id)}>
                                 <i 
                                 className="fa-solid fa-x"
                                 key={index}>

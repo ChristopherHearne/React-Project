@@ -23,3 +23,11 @@ exports.postHabit = (req, res) => {
         else res.status(201).json(newHabit)
     })
 }
+
+exports.deleteHabit = (req, res) => {
+    Habit.deleteOne(req.params.id, (habit, err) => {
+        if(err) res.status(401).send(err)
+        else if(habit === null) res.status(404).json({Error: `Could not delete habit since it was not found`})
+        else res.status(201).json(habit)
+    })
+}
