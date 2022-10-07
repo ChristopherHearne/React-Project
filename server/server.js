@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const userService = require('../server/services/userService')
+const users = require('./routers/userRouter')
+const habits = require('./routers/habitRouter')
 
 const app = express(); 
 app.use(express.json())
@@ -24,6 +25,7 @@ app.use( (req, res, next) =>  {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, credentials, cors");
     next();
 })
+app.set('json spaces', 2)
 
 const port = process.env.REACT_APP_PORT || 3002
 
@@ -31,21 +33,6 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`) 
 })
 
-app.post('/users', (req, res) => {
-    userService.createUser(req, res)
-})
-
-app.get('/users', (req, res) => {
-    userService.getAllUsers(req, res)
-})
-
-app.get('/users/:id', (req, res) => {
-    userService.getUser(req, res)
-})
-
-app.get('/users/emails/:email', (req, res) => {
-    userService.findUserByEmail(req, res)
-})
-
-
-app.set('json spaces', 2)
+// Routers
+app.use('/users', users)
+app.use('/habits', habits)

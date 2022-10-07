@@ -32,6 +32,7 @@ export default function SignIn(){
                     setActiveUser(userData)
                     setHideSignIn(true)
                     setShowUserInfo(true)
+                    
                 } catch(err){
                     alert(err)
                 }
