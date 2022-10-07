@@ -1,12 +1,15 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
+import { postHabit } from '../API'
 
 
 export default function AddHabit(){
     const [habit, setHabit] = useState('')
     const [habitList, setHabitList] = useState([])
     
-    const addHabit = () => {
+    const addHabit = async () => {
+        const activeUser = JSON.parse(localStorage.getItem('user')).email
+        await postHabit(activeUser, habit)
         setHabitList(arr => [...arr, habit])
         setHabit('')
     }

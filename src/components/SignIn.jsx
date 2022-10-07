@@ -30,9 +30,10 @@ export default function SignIn(){
                     }
 
                     setActiveUser(userData)
+                    localStorage.setItem('user', JSON.stringify(userData))
                     setHideSignIn(true)
                     setShowUserInfo(true)
-                    
+
                 } catch(err){
                     alert(err)
                 }

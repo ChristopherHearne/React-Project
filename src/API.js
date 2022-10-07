@@ -1,3 +1,4 @@
+
 export async function postUserData(userData) {
     const dbData =
     {
@@ -55,6 +56,39 @@ export async function fetchUsers(){
         const result = await request.json()
         return result
     } catch(error){
-        console.log(error.message)
+        console.log(error)
+    }
+}
+
+export async function postHabit(email, habitTitle){
+    const userURL = `http://localhost:3002/users/emails/${email}`
+    const habitURL = `http://localhost:3002/habits`
+    try{
+        let [activeUser, habitInfo] = await Promise.all([
+            fetch(userURL, {
+                method: 'GET',
+                headers: {
+                    'Content-type': "application/json",
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+            }),
+            fetch(habitURL, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: habitTitle,
+                    createdBy: await activeUser.json()
+                })
+            })
+        ])
+
+
+        const result = await habitInfo.json()
+        return result
+    }   
+    catch(error){
+        console.log(error)
     }
 }
