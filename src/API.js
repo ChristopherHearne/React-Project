@@ -64,27 +64,17 @@ export async function postHabit(email, habitTitle){
     const userURL = `http://localhost:3002/users/emails/${email}`
     const habitURL = `http://localhost:3002/habits`
     try{
-        let [activeUser, habitInfo] = await Promise.all([
-            fetch(userURL, {
-                method: 'GET',
-                headers: {
-                    'Content-type': "application/json",
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-            }),
-            fetch(habitURL, {
+            const activeUser = await fetchUserByEmail(email)
+            const habitInfo = await fetch(habitURL, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify({
                     title: habitTitle,
-                    createdBy: await activeUser.json()
+                    createdBy: activeUser.content
                 })
             })
-        ])
-
-
         const result = await habitInfo.json()
         return result
     }   

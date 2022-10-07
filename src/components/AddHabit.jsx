@@ -9,8 +9,9 @@ export default function AddHabit(){
     
     const addHabit = async () => {
         const activeUser = JSON.parse(localStorage.getItem('user')).email
-        await postHabit(activeUser, habit)
-        setHabitList(arr => [...arr, habit])
+        const habitInfo = await postHabit(activeUser, habit)
+        console.log(habitInfo)
+        setHabitList(arr => [...arr, habitInfo.title])
         setHabit('')
     }
 
