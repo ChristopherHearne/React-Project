@@ -1,17 +1,26 @@
 import React from 'react'
 import './App.css';
-import Navbar from './components/Navbar'
-import AddHabit from './components/AddHabit'
-import CategoryComponent from './components/CategoryComponent';
+import { BrowserRouter, Routes, Route} from "react-router-dom"
+import Layout from './pages/Layout';
+import Home from './pages/Home';
+import HabitScoreCard from './pages/HabitScoreCard';
+import HabitStacking from './pages/HabitStacking';
+import Manifesto from './pages/Manifesto';
+import NoPage from './pages/NoPage';
 
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <AddHabit />
-      <CategoryComponent />
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Home/>}/>
+          <Route path="scorecard" element={<HabitScoreCard/>}/>
+          <Route path="stacking" element={<HabitStacking/>}/>
+          <Route path="manifesto" element={<Manifesto/>}/>
+          <Route path="*" element={<NoPage/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
-export default App;

@@ -1,3 +1,6 @@
+*{
+  font-family: 'Inter', sans-serif;
+}
 body{
   margin: 0;
   box-sizing: border-box;
@@ -186,7 +189,9 @@ body{
 
 .navbar--container a{
   margin: 0 0 30px 20px; 
-  cursor:pointer; 
+  cursor:pointer;
+  text-decoration: none;
+  color: #3F4E4F; 
 }
 
 .navbar--items{
