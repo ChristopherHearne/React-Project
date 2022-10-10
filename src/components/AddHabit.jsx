@@ -55,14 +55,14 @@ export default function AddHabit(){
                             key={index}
                             draggable
                             onDragStart={dragStart}
-                            onDragEnd={event => deleteHabit(index, habit.id)}>
+                            onDragEnd={event => deleteHabit(index, habit._id)}>
                             <span
                                 className="habit--title">
                                     {habit.title}
                             </span>
                             <span className="delete--item"
                                 key={index}
-                                onClick={event => deleteHabit(index, habit.id)}>
+                                onClick={event => deleteHabit(index, habit._id)}>
                                 <i 
                                 className="fa-solid fa-x"
                                 key={index}>

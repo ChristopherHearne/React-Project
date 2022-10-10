@@ -61,7 +61,6 @@ export async function fetchUsers(){
 }
 
 export async function postHabit(email, habitTitle){
-    const userURL = `http://localhost:3002/users/emails/${email}`
     const habitURL = `http://localhost:3002/habits`
     try{
             const activeUser = await fetchUserByEmail(email)
@@ -84,7 +83,6 @@ export async function postHabit(email, habitTitle){
 }
 
 export async function getHabitsByUser(email){
-    const userURL = `http://localhost:3002/users/emails/${email}`
     const habitURL = `http://localhost:3002/habits/user/`
     try{
         const activeUser = await fetchUserByEmail(email)
