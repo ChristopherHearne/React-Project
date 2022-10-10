@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import { postHabit, destroyHabit } from '../API'
+import { postHabit, destroyHabit, getHabitsByUser } from '../API'
 
 
 export default function AddHabit(){
@@ -20,6 +20,12 @@ export default function AddHabit(){
         const requestInfo = await destroyHabit(id)
         console.log(requestInfo)
         setHabitList(habitList.filter((element) => habitList[index] !== element))
+    }
+
+    const getHabits = async () => {
+        const activeUser = JSON.parse(localStorage.getItem('user').email)
+        const habitList = await getHabitsByUser(activeUser)
+        console.log(habitList)
     }
 
     const handleChange = (event) => {
