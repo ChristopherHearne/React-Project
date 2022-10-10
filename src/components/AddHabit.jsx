@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {useState, useEffect} from 'react'
 import { postHabit, destroyHabit, getHabitsByUser } from '../API'
 
@@ -6,30 +7,41 @@ import { postHabit, destroyHabit, getHabitsByUser } from '../API'
 export default function AddHabit(){
     const [habit, setHabit] = useState('')
     const [habitList, setHabitList] = useState([])
+    const activeUser = localStorage.getItem('user')
     
     const addHabit = async () => {
-        const activeUser = JSON.parse(localStorage.getItem('user')).email
-        const habitInfo = await postHabit(activeUser, habit)
-        setHabitList(arr => [...arr, habitInfo])
-        setHabit('')
+        if(activeUser){
+            const userEmail = JSON.parse(activeUser).email
+            const habitInfo = await postHabit(userEmail, habit)
+            setHabitList(arr => [...arr, habitInfo])
+            setHabit('')
+        }
+        else{
+            setHabitList(arr => [...arr, {title: habit}])
+            setHabit('')
+        }
     }
 
     // TODO: This is going to create a bug where the habits with the same title is going to be deleted in the DOM but not in the DB
     const deleteHabit = async (index, id) => {
-        console.log(id)
         const requestInfo = await destroyHabit(id)
-        console.log(requestInfo)
         setHabitList(habitList.filter((element) => habitList[index] !== element))
     }
 
     // TODO: This retrieves the list of habits, but it keeps being called inside the function
     const getHabits = async () => {
-        const activeUser = JSON.parse(localStorage.getItem('user')).email
-        const habitList = await getHabitsByUser(activeUser)
-        setHabitList(arr => [...arr, habitList])
-        console.log(habitList)
+        if(activeUser) {
+            const userEmail = JSON.parse(activeUser).email
+            const habitList = await getHabitsByUser(userEmail)
+            setHabitList(habitList)
+        }
     }
-    
+
+    useEffect(() => {
+        getHabits()
+    }, [])
+
+    getHabits()
     const handleChange = (event) => {
         setHabit(event.target.value)
     }
