@@ -22,12 +22,14 @@ export default function AddHabit(){
         setHabitList(habitList.filter((element) => habitList[index] !== element))
     }
 
+    // TODO: This retrieves the list of habits, but it keeps being called inside the function
     const getHabits = async () => {
-        const activeUser = JSON.parse(localStorage.getItem('user').email)
+        const activeUser = JSON.parse(localStorage.getItem('user')).email
         const habitList = await getHabitsByUser(activeUser)
+        setHabitList(arr => [...arr, habitList])
         console.log(habitList)
     }
-
+    
     const handleChange = (event) => {
         setHabit(event.target.value)
     }

@@ -11,7 +11,6 @@ export default function SignIn(){
     const checkPreviousLogin = async (email) => { // TODO: Sends a 401 Unauthorized status every time the fetch is made, needs to be fixed. This means a correct fetch doesnt return the 201 status
       const response =  await fetchUserByEmail(email)
       if (response.status !== 404){
-        console.log("Had previous login")
         return true
       }
       return false
@@ -48,10 +47,21 @@ export default function SignIn(){
             cancel_on_tap_outside: true
           });
         }
-      }, [googleSignInButton.current]);
+
+        const loggedInUser = localStorage.getItem("user")
+        if(loggedInUser) {
+          setActiveUser(JSON.parse(loggedInUser))
+          setHideSignIn(true)
+          setShowUserInfo(true)
+        }
+      }, []);
         
     const onClick = () => {
         window.google.accounts.id.prompt()
+    }
+
+    const logOut = () => {
+      localStorage.clear("user")
     }
 
     return (
@@ -60,6 +70,7 @@ export default function SignIn(){
             <div className={`user--info--hidden ${showUserInfo ? "user--info--visible" :""}`}>
                 <p>Welcome {activeUser.given_name} {activeUser.family_name}!</p>
                 <img src={activeUser.picture} alt={`${activeUser.given_name}'s Google Account`}></img>
+                <button onClick={logOut}>Sign Out</button>
             </div>
         </div>
     )
