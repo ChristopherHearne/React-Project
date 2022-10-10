@@ -83,6 +83,25 @@ export async function postHabit(email, habitTitle){
     }
 }
 
+export async function getHabitsByUser(email){
+    const userURL = `http://localhost:3002/users/emails/${email}`
+    const habitURL = `http://localhost:3002/habits/user/`
+    try{
+        const activeUser = await fetchUserByEmail(email)
+        const habitsByUser = await fetch(`${habitURL}${activeUser.content._id}`, {
+            method: 'GET',
+            headers: {
+                'Content-type': "application/json",
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+        })
+        const result = await habitsByUser.json()
+        return result
+    } catch(error) {
+        console.log(error)
+    }
+}
+
 export async function destroyHabit(id){
     const deleteRequestURL = `http://localhost:3002/habits/${id}`
     try{

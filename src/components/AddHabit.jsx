@@ -10,14 +10,13 @@ export default function AddHabit(){
     const addHabit = async () => {
         const activeUser = JSON.parse(localStorage.getItem('user')).email
         const habitInfo = await postHabit(activeUser, habit)
-        console.log(habitInfo)
         setHabitList(arr => [...arr, habitInfo])
-        console.log(habitList)
         setHabit('')
     }
 
     // TODO: This is going to create a bug where the habits with the same title is going to be deleted in the DOM but not in the DB
     const deleteHabit = async (index, id) => {
+        console.log(id)
         const requestInfo = await destroyHabit(id)
         console.log(requestInfo)
         setHabitList(habitList.filter((element) => habitList[index] !== element))

@@ -18,4 +18,7 @@ router.delete('/:id', (req, res) => {
     habitService.deleteHabit(req, res)
 })
 
+router.get('/user/:id', (req, res) => {
+    habitService.getHabitsByUser(req, res)
+})
 module.exports = router

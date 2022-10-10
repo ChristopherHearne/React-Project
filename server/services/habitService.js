@@ -14,7 +14,13 @@ exports.getHabitById = (req, res) => {
         else res.status(201).json(habit)
     }) 
 }
-
+exports.getHabitsByUser = (req, res) => {
+    Habit.find({createdBy: req.params.id}, (habits, err) => {
+        if(err) res.status(401).send(err)
+        else if(habits === null) res.status(404).json({Error: `Could not find habits with that createdBy id`})
+        else res.status(201).json(habits)
+    })
+}
 exports.postHabit = (req, res) => {
     const {id, title, createdBy} = req.body
     const newHabit = new Habit({id, title, createdBy})
@@ -25,7 +31,7 @@ exports.postHabit = (req, res) => {
 }
 
 exports.deleteHabit = (req, res) => {
-    Habit.deleteOne(req.params.id, (habit, err) => {
+    Habit.deleteOne({_id: req.params.id}, (habit, err) => {
         if(err) res.status(401).send(err)
         else if(habit === null) res.status(404).json({Error: `Could not delete habit since it was not found`})
         else res.status(201).json(habit)
