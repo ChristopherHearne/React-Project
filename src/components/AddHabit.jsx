@@ -41,7 +41,6 @@ export default function AddHabit(){
         getHabits()
     }, [])
 
-    getHabits()
     const handleChange = (event) => {
         setHabit(event.target.value)
     }
